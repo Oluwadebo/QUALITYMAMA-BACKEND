@@ -7,6 +7,7 @@ const uploadSchema = new mongoose.Schema(
         price: String,
         file: String,
         adminId: String,
+        description:String,
     }
 )
 
