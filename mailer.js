@@ -17,7 +17,7 @@ const customermail = async (emails) => {
   let info = await transporter.sendMail({
     from: process.env.EMAIL,
     to: emails,
-    subject: "Anthony app ✔",
+    subject: "QUALITYMAMA ✔",
     // text: "Hello world?",
     html: `<div
         style="

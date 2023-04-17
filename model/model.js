@@ -7,7 +7,8 @@ const uploadSchema = new mongoose.Schema(
         price: String,
         file: String,
         adminId: String,
-        description:String,
+        description: String,
+        selectedOption: String,
     }
 )
 
@@ -54,7 +55,7 @@ const AddtocartSchema = new mongoose.Schema(
     {
         customerId: {
             type: String,
-            require:true,
+            require: true,
         },
         product: String,
         price: String,

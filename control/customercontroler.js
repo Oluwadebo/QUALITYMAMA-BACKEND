@@ -95,10 +95,12 @@ const addtocart = (req, res) => {
             console.log(err);
         } else {
             let addtocart = result[0];
-            AddtocartModel.create({ ...req.body, customerId: customerId, product: addtocart.product, price: addtocart.price, file: addtocart.file, }, (err, message) => {
+            AddtocartModel.create({ ...req.body, customerId: customerId, product: addtocart.product, price: addtocart.price, file: addtocart.file, }, (err, result) => {
                 if (err) {
                     console.log(err);
                 } else {
+                    console.log(result);
+                    res.send({ message: "add-to-cart successfuly", result })
                     // console.log(message);
                 }
             })
@@ -111,6 +113,7 @@ const getaddtocart = (req, res) => {
     AddtocartModel.find({ customerId }, (err, result) => {
         if (err) {
         } else {
+            console.log(result);
             res.send({ result })
         }
     })
@@ -125,5 +128,14 @@ const removeaddtocart = (req, res) => {
         }
     })
 }
+const Similarity = (req, res) => {
+    let selectedOption = req.body.Similarity;
+    UploadModel.find({ selectedOption }, (err, result) => {
+        if (err) {
+        } else {
+            res.send({ result })
+        }
+    })
+}
 
-module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart };
+module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart,Similarity };
