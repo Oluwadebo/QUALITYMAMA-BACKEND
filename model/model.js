@@ -58,6 +58,7 @@ const AddtocartSchema = new mongoose.Schema(
             require: true,
         },
         product: String,
+        description: String,
         price: String,
         file: String,
     }

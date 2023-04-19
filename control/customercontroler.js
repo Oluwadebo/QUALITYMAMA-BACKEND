@@ -32,7 +32,7 @@ const login = (req, res) => {
             else {
                 const validPassword = await bcrypt.compare(password, message.password);
                 if (validPassword) {
-                    const token = jwt.sign({ _id: message._id }, process.env.JWT_SECRET, { expiresIn: "1h" })
+                    const token = jwt.sign({ _id: message._id }, process.env.JWT_SECRET, { expiresIn: "2h" })
                     res.send({ token, message: "Token generated", status: true });
                 } else {
                     res.send({ status: false, message: "Invaild password" })
@@ -95,11 +95,10 @@ const addtocart = (req, res) => {
             console.log(err);
         } else {
             let addtocart = result[0];
-            AddtocartModel.create({ ...req.body, customerId: customerId, product: addtocart.product, price: addtocart.price, file: addtocart.file, }, (err, result) => {
+            AddtocartModel.create({ ...req.body, customerId: customerId, product: addtocart.product, description: addtocart.description, price: addtocart.price, file: addtocart.file, }, (err, result) => {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log(result);
                     res.send({ message: "add-to-cart successfuly", result })
                     // console.log(message);
                 }
@@ -113,7 +112,7 @@ const getaddtocart = (req, res) => {
     AddtocartModel.find({ customerId }, (err, result) => {
         if (err) {
         } else {
-            console.log(result);
+            // console.log(result);
             res.send({ result })
         }
     })
@@ -138,4 +137,4 @@ const Similarity = (req, res) => {
     })
 }
 
-module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart,Similarity };
+module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity };
