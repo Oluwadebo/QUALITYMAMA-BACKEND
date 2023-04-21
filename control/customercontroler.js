@@ -77,6 +77,26 @@ const goods = (req, res) => {
     })
 }
 
+const onsale = (req, res) => {
+    let selectedOption = req.body.Onsale
+    UploadModel.find({ selectedOption }, (err, result) => {
+        if (err) {
+        } else {
+            res.send({ result })
+        }
+    })
+}
+
+const fashion = (req, res) => {
+    let selectedOption = req.body.fashio
+    UploadModel.find({ selectedOption }, (err, result) => {
+        if (err) {
+        } else {
+            res.send({ result })
+        }
+    })
+}
+
 const Viewproduct = (req, res) => {
     let _id = req.body.ViewproductId;
     UploadModel.find({ _id }, (err, result) => {
@@ -100,7 +120,6 @@ const addtocart = (req, res) => {
                     console.log(err);
                 } else {
                     res.send({ message: "add-to-cart successfuly", result })
-                    // console.log(message);
                 }
             })
         }
@@ -112,11 +131,11 @@ const getaddtocart = (req, res) => {
     AddtocartModel.find({ customerId }, (err, result) => {
         if (err) {
         } else {
-            // console.log(result);
             res.send({ result })
         }
     })
 }
+
 const removeaddtocart = (req, res) => {
     let { id } = req.body;
     AddtocartModel.findByIdAndDelete({ _id: id }, (err, result) => {
@@ -127,6 +146,7 @@ const removeaddtocart = (req, res) => {
         }
     })
 }
+
 const Similarity = (req, res) => {
     let selectedOption = req.body.Similarity;
     UploadModel.find({ selectedOption }, (err, result) => {
@@ -137,4 +157,4 @@ const Similarity = (req, res) => {
     })
 }
 
-module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity };
+module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity,onsale,fashion };
