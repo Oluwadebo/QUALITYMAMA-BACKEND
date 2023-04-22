@@ -3,7 +3,7 @@ const { UploadModel, CustomerModel, AddtocartModel } = require('../model/model')
 const cloudinary = require('cloudinary');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { customermail } = require('../mailer');
+const { customermail, ordered, useraccountNumber, userName } = require('../mailer');
 require('dotenv').config()
 
 const regist = (req, res) => {
@@ -17,6 +17,18 @@ const regist = (req, res) => {
             res.send({ message: "saved", status: true })
         }
     })
+}
+
+const ordere = (req, res) => {
+    const Name = req.body.Name;
+    const email = req.body.email;
+    // const information = req.body;
+    // const information = req.body;
+    const orded = req.body.ordered;
+    userName(Name)
+    useraccountNumber(orded)
+    ordered(process.env.EMAIL)
+    // console.log(orded);
 }
 
 const login = (req, res) => {
@@ -157,4 +169,4 @@ const Similarity = (req, res) => {
     })
 }
 
-module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity,onsale,fashion };
+module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity, onsale, fashion, ordere };
