@@ -22,13 +22,10 @@ const regist = (req, res) => {
 const ordere = (req, res) => {
     const Name = req.body.Name;
     const email = req.body.email;
-    // const information = req.body;
-    // const information = req.body;
     const orded = req.body.ordered;
     userName(Name)
     useraccountNumber(orded)
     ordered(process.env.EMAIL)
-    // console.log(orded);
 }
 
 const login = (req, res) => {
@@ -36,7 +33,6 @@ const login = (req, res) => {
     CustomerModel.findOne({ email }, async (err, message) => {
         if (err) {
             res.send(err)
-            console.log(err);
         } else {
             if (!message) {
                 res.send({ status: false, message: "Email not found" })
@@ -123,14 +119,10 @@ const addtocart = (req, res) => {
     let _id = req.body.val;
     let customerId = req.body.customerId;
     UploadModel.find({ _id }, (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
+        if (err) {} else {
             let addtocart = result[0];
             AddtocartModel.create({ ...req.body, customerId: customerId, product: addtocart.product, description: addtocart.description, price: addtocart.price, file: addtocart.file, }, (err, result) => {
-                if (err) {
-                    console.log(err);
-                } else {
+                if (err) {} else {
                     res.send({ message: "add-to-cart successfuly", result })
                 }
             })
@@ -169,4 +161,20 @@ const Similarity = (req, res) => {
     })
 }
 
-module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity, onsale, fashion, ordere };
+const Recentlyviewed = (req, res) => {
+    let viewedProducts = req.body;
+    const products = [];
+    viewedProducts.forEach((id) => {
+        UploadModel.find({ _id: id }, (err, result) => {
+            if (err) { }
+            if (result) {
+                products.push(result[0]);
+            }
+            if (products.length === viewedProducts.length) {
+                res.send({ products })
+            }
+        })
+    })
+}
+
+module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity, onsale, fashion, ordere, Recentlyviewed };

@@ -23,8 +23,7 @@ const adminlogin = (req, res) => {
     const { email, password } = req.body;
     AdminModel.findOne({ email }, async (err, message) => {
         if (err) {
-            res.send(err)
-            console.log(err);
+            res.send(err);
         } else {
             if (!message) {
                 res.send({ status: false, message: "Email not found" })
@@ -57,7 +56,6 @@ const admin = (req, res) => {
                         res.send({ result, status: true, message: "Valid Token" })
                     }
                     else {
-                        console.log(result);
                         res.send({ message: "empty array" })
                     }
                 }
@@ -75,9 +73,7 @@ const file = (req, res) => {
         } else {
             const myimage = result.url;
             UploadModel.create({ ...req.body, file: myimage, }, (err) => {
-                if (err) {
-                    console.log(err);
-                } else {
+                if (err) {} else {
                     res.send({ message: "Upload successfuly", status: true })
                 }
             })
@@ -98,9 +94,7 @@ const adminfiles = (req, res) => {
 const delproduct = (req, res) => {
     let { id } = req.body;
     UploadModel.findByIdAndDelete({ _id: id }, (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
+        if (err) {} else {
             res.send({ result });
         }
     })

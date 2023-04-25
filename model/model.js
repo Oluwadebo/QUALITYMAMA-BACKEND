@@ -9,6 +9,7 @@ const uploadSchema = new mongoose.Schema(
         adminId: String,
         description: String,
         selectedOption: String,
+        Pprice: String,
     }
 )
 

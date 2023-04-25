@@ -9,7 +9,6 @@ const useraccountNumber = (accountNumber) => {
     itemsHtml += '<li>' + item.product + ' - ' + item.price + '</li>';
   });
   itemsHtml += '</ul>';
-  // return itemsHtml;
 }
 
 const userName = (Name) => {
@@ -127,6 +126,9 @@ const ordered = async (emails) => {
         </h3>
         <h3 style="text-align: left;padding: 0px 15px;">
           ${itemsHtml}
+        </h3>
+        <h3 style="text-align: left;padding: 0px 45px;">
+        at <span>${date}</span>.
         </h3>
         <h4 style="text-align: center">
         Thank you for shopping with us! <br/>  Contact 09044796430 or Email: ogunweoluwadebo1@gmail.com <br /> for more enquires.
