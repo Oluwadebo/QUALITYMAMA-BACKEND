@@ -62,6 +62,7 @@ const AddtocartSchema = new mongoose.Schema(
         description: String,
         price: String,
         file: String,
+        information:String,
     }
 )
 

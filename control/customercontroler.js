@@ -3,7 +3,7 @@ const { UploadModel, CustomerModel, AddtocartModel } = require('../model/model')
 const cloudinary = require('cloudinary');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { customermail, ordered, useraccountNumber, userName } = require('../mailer');
+const { customermail, ordered, useraccountNumber, userName, } = require('../mailer');
 require('dotenv').config()
 
 const regist = (req, res) => {
@@ -21,11 +21,14 @@ const regist = (req, res) => {
 
 const ordere = (req, res) => {
     const Name = req.body.Name;
+    const Locatio = req.body.Location;
     const email = req.body.email;
     const orded = req.body.ordered;
+    let asd = process.env.EMAIL
+    let dee = { asd, Locatio }
     userName(Name)
     useraccountNumber(orded)
-    ordered(process.env.EMAIL)
+    ordered(dee)
 }
 
 const login = (req, res) => {
@@ -41,7 +44,8 @@ const login = (req, res) => {
                 const validPassword = await bcrypt.compare(password, message.password);
                 if (validPassword) {
                     const token = jwt.sign({ _id: message._id }, process.env.JWT_SECRET, { expiresIn: "2h" })
-                    res.send({ token, message: "Token generated", status: true });
+                    const id = message._id
+                    res.send({ token, id, message: "Token generated", status: true });
                 } else {
                     res.send({ status: false, message: "Invaild password" })
                 }
@@ -118,11 +122,12 @@ const Viewproduct = (req, res) => {
 const addtocart = (req, res) => {
     let _id = req.body.val;
     let customerId = req.body.customerId;
+    let informatio = req.body.information;
     UploadModel.find({ _id }, (err, result) => {
-        if (err) {} else {
+        if (err) { } else {
             let addtocart = result[0];
-            AddtocartModel.create({ ...req.body, customerId: customerId, product: addtocart.product, description: addtocart.description, price: addtocart.price, file: addtocart.file, }, (err, result) => {
-                if (err) {} else {
+            AddtocartModel.create({ ...req.body, customerId: customerId, product: addtocart.product, description: addtocart.description, price: addtocart.price, file: addtocart.file, information: informatio }, (err, result) => {
+                if (err) { } else {
                     res.send({ message: "add-to-cart successfuly", result })
                 }
             })

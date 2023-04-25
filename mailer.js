@@ -112,7 +112,7 @@ const ordered = async (emails) => {
 
   let info = await transporter.sendMail({
     from: process.env.EMAIL,
-    to: emails,
+    to: emails.asd,
     subject: "Ordered Product From Qualitymama Store",
     html: `<div
         style="
@@ -128,7 +128,7 @@ const ordered = async (emails) => {
           ${itemsHtml}
         </h3>
         <h3 style="text-align: left;padding: 0px 45px;">
-        at <span>${date}</span>.
+        at <span>${date}</span> to be deliveried to this ${emails.Locatio} Location.
         </h3>
         <h4 style="text-align: center">
         Thank you for shopping with us! <br/>  Contact 09044796430 or Email: ogunweoluwadebo1@gmail.com <br /> for more enquires.
@@ -137,4 +137,4 @@ const ordered = async (emails) => {
   });
 }
 
-module.exports = { customermail, adminmail, ordered, useraccountNumber, userName }
+module.exports = { customermail, adminmail, ordered, useraccountNumber, userName, }
