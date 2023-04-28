@@ -23,12 +23,13 @@ const ordere = (req, res) => {
     const Name = req.body.Name;
     const Locatio = req.body.Location;
     const email = req.body.email;
+    const id = req.body.id;
     const orded = req.body.ordered;
-    let asd = process.env.EMAIL
-    let dee = { asd, Locatio }
-    userName(Name)
+    let EMAIL = process.env.EMAIL
+    let info = { EMAIL,email, Locatio, id, Name }
     useraccountNumber(orded)
-    ordered(dee)
+    ordered(info)
+    res.send({ message: "Mailed send", status: true })
 }
 
 const login = (req, res) => {
@@ -155,6 +156,17 @@ const removeaddtocart = (req, res) => {
         }
     })
 }
+const removecart = (req, res) => {
+    let customerId = req.body.id;
+    console.log(customerId);
+    AddtocartModel.findOneAndDelete({customerId}, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send({ result });
+        }
+    })
+}
 
 const Similarity = (req, res) => {
     let selectedOption = req.body.Similarity;
@@ -182,4 +194,4 @@ const Recentlyviewed = (req, res) => {
     })
 }
 
-module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity, onsale, fashion, ordere, Recentlyviewed };
+module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity, onsale, fashion, ordere, Recentlyviewed, removecart };

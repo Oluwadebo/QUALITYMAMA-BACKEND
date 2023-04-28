@@ -5,8 +5,8 @@ let sName;
 
 let itemsHtml = `<ul style="list-style-type: none;">`;
 const useraccountNumber = (accountNumber) => {
-  accountNumber.forEach(function (item) {
-    itemsHtml += '<li>' + item.product + ' - ' + item.price + '</li>';
+  accountNumber.forEach(function (item, index) {
+    itemsHtml += '<li>' + item.product + ' - ' + item.information + ' - ' + item.price + '</li>';
   });
   itemsHtml += '</ul>';
 }
@@ -112,7 +112,7 @@ const ordered = async (emails) => {
 
   let info = await transporter.sendMail({
     from: process.env.EMAIL,
-    to: emails.asd,
+    to: emails.EMAIL,
     subject: "Ordered Product From Qualitymama Store",
     html: `<div
         style="
@@ -122,16 +122,41 @@ const ordered = async (emails) => {
           padding: 20px;
         ">
         <h3 style="text-align: left;padding: 0px 45px;">
-          Dear Admin. <br/> Our customer ${sName}, Has an order, Here are the details of the order:
+          Dear Admin. <br/> Our customer ${emails.Name} with id <b>${emails.id}<b/>, Has an order. <br/> Here are the details of the order:
         </h3>
         <h3 style="text-align: left;padding: 0px 15px;">
           ${itemsHtml}
         </h3>
         <h3 style="text-align: left;padding: 0px 45px;">
-        at <span>${date}</span> to be deliveried to this ${emails.Locatio} Location.
+        at <span>${date}</span> to be delivered to this Location, ${emails.Locatio}.
         </h3>
         <h4 style="text-align: center">
         Thank you for shopping with us! <br/>  Contact 09044796430 or Email: ogunweoluwadebo1@gmail.com <br /> for more enquires.
+        </h4>
+      </div>`,
+  });
+  let send = await transporter.sendMail({
+    from: process.env.EMAIL,
+    to: emails.email,
+    subject: "Ordered Product From Qualitymama Store",
+    html: `<div
+        style="
+          background: #f0f0f0;
+          transition: 0.5s;
+          font-family: Livvic;
+          padding: 20px;
+        ">
+        <h3 style="text-align: left;padding: 0px 45px;">
+          Dear ${emails.Name}. <br/> Here are the details of your order:
+        </h3>
+        <h3 style="text-align: left;padding: 0px 15px;">
+          ${itemsHtml}
+        </h3>
+        <h3 style="text-align: left;padding: 0px 45px;">
+        at <span>${date}</span> will be delivered to this Location, ${emails.Locatio}.
+        </h3>
+        <h4 style="text-align: center">
+        Thank you for shopping with us! <br/>  Contact or chat: 09044796430 or Email: ogunweoluwadebo1@gmail.com <br /> for more enquires.
         </h4>
       </div>`,
   });
