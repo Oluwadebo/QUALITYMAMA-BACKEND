@@ -31,7 +31,7 @@ const customermail = async (emails) => {
   let info = await transporter.sendMail({
     from: process.env.EMAIL,
     to: emails,
-    subject: "QUALITYMAMA ✔",
+    subject: "QUALITYMAMA",
     // text: "Hello world?",
     html: `<div
         style="
@@ -48,8 +48,8 @@ const customermail = async (emails) => {
           Your account was successfully created at <span>${date}</span>.
         </h3>
         <h4 style="text-align: center">
-          Contact 09044796430 or Email: ogunweoluwadebo@gmail.com <br />
-          for WEB SITE DEVELOPMENT
+        Contact:09044796430,08104495801,08087683003 or Email: qualitymamaddg@gmail.com<br />
+        for more enquires.
         </h4>
       </div>`,
 
@@ -72,7 +72,7 @@ const adminmail = async (emails) => {
   let info = await transporter.sendMail({
     from: process.env.EMAIL,
     to: emails,
-    subject: "Anthony app ✔",
+    subject: "QUALITYMAMA",
     // text: "Hello world?",
     html: `<div
         style="
@@ -89,8 +89,8 @@ const adminmail = async (emails) => {
           Your account as one of our admin, was successfully created at <span>${date}</span>.
         </h3>
         <h4 style="text-align: center">
-          Contact 09044796430 or Email: ogunweoluwadebo@gmail.com <br />
-          for WEB SITE DEVELOPMENT
+          Contact:09044796430,08104495801,08087683003 or Email: qualitymamaddg@gmail.com<br />
+          for more enquires.
         </h4>
       </div>`,
 
@@ -131,7 +131,7 @@ const ordered = async (emails) => {
         at <span>${date}</span> to be delivered to this Location, ${emails.Locatio}.
         </h3>
         <h4 style="text-align: center">
-        Thank you for shopping with us! <br/>  Contact 09044796430 or Email: ogunweoluwadebo1@gmail.com <br /> for more enquires.
+        Thank you for shopping with us! <br/>  Contact:09044796430,08104495801,08087683003 or Email: qualitymamaddg@gmail.com<br /> for more enquires.
         </h4>
       </div>`,
   });
@@ -156,7 +156,7 @@ const ordered = async (emails) => {
         at <span>${date}</span> will be delivered to this Location, ${emails.Locatio}.
         </h3>
         <h4 style="text-align: center">
-        Thank you for shopping with us! <br/>  Contact or chat: 09044796430 or Email: ogunweoluwadebo1@gmail.com <br /> for more enquires.
+        Thank you for shopping with us! <br/>  Contact or chat:09044796430,08104495801,08087683003 or Email: qualitymamaddg@gmail.com <br /> for more enquires.
         </h4>
       </div>`,
   });

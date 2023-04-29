@@ -158,12 +158,12 @@ const removeaddtocart = (req, res) => {
 }
 const removecart = (req, res) => {
     let customerId = req.body.id;
-    console.log(customerId);
     AddtocartModel.findOneAndDelete({customerId}, (err, result) => {
         if (err) {
             console.log(err);
         } else {
             res.send({ result });
+            console.log(result);
         }
     })
 }
