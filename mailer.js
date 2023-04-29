@@ -48,7 +48,7 @@ const customermail = async (emails) => {
           Your account was successfully created at <span>${date}</span>.
         </h3>
         <h4 style="text-align: center">
-        Contact:09044796430,08104495801,08087683003 or Email: qualitymamaddg@gmail.com<br />
+        Contact: 09044796430, 08104495801, 08087683003 or Email: qualitymamaddg@gmail.com<br />
         for more enquires.
         </h4>
       </div>`,
@@ -89,7 +89,7 @@ const adminmail = async (emails) => {
           Your account as one of our admin, was successfully created at <span>${date}</span>.
         </h3>
         <h4 style="text-align: center">
-          Contact:09044796430,08104495801,08087683003 or Email: qualitymamaddg@gmail.com<br />
+          Contact: 09044796430, 08104495801, 08087683003 or Email: qualitymamaddg@gmail.com<br />
           for more enquires.
         </h4>
       </div>`,
@@ -131,7 +131,7 @@ const ordered = async (emails) => {
         at <span>${date}</span> to be delivered to this Location, ${emails.Locatio}.
         </h3>
         <h4 style="text-align: center">
-        Thank you for shopping with us! <br/>  Contact:09044796430,08104495801,08087683003 or Email: qualitymamaddg@gmail.com<br /> for more enquires.
+        Thank you for shopping with us! <br/>  Contact: 09044796430, 08104495801, 08087683003 or Email: qualitymamaddg@gmail.com<br /> for more enquires.
         </h4>
       </div>`,
   });
@@ -156,7 +156,7 @@ const ordered = async (emails) => {
         at <span>${date}</span> will be delivered to this Location, ${emails.Locatio}.
         </h3>
         <h4 style="text-align: center">
-        Thank you for shopping with us! <br/>  Contact or chat:09044796430,08104495801,08087683003 or Email: qualitymamaddg@gmail.com <br /> for more enquires.
+        Thank you for shopping with us! <br/>  Contact or chat: 09044796430, 08104495801, 08087683003 or Email: qualitymamaddg@gmail.com <br /> for more enquires.
         </h4>
       </div>`,
   });
