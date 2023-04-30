@@ -3,7 +3,7 @@ const { UploadModel, AdminModel } = require('../model/model');
 const cloudinary = require('cloudinary');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { adminmail } = require('../mailer');
+const { adminmail, adminfpmail } = require('../mailer');
 require('dotenv').config()
 
 const adminregist = (req, res) => {
@@ -41,6 +41,31 @@ const adminlogin = (req, res) => {
     })
 }
 
+const adminfp = (req, res) => {
+    const email = req.body.mail;
+    AdminModel.findOne({ email }, async (err, message) => {
+        if (err) {
+            res.send(err);
+        }else {
+            if (!message) {
+                res.send({ status: false, message: "Email not found" })
+            }else {
+                let email = message.email
+                let name = message.Name
+                let info = {email,name}
+                adminfpmail(info)
+                //             const validPassword = await bcrypt.compare(password, message.password);
+                //             if (validPassword) {
+                //                 const token = jwt.sign({ _id: message._id }, process.env.JWT_SECRET, { expiresIn: "1h" })
+                //                 res.send({ token, message: "Token generated", status: true });
+                //             } else {
+                //                 res.send({ status: false, message: "Invaild password" })
+                //             }
+            }
+        }
+    })
+}
+
 const admin = (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
@@ -73,7 +98,7 @@ const file = (req, res) => {
         } else {
             const myimage = result.url;
             UploadModel.create({ ...req.body, file: myimage, }, (err) => {
-                if (err) {} else {
+                if (err) { } else {
                     res.send({ message: "Upload successfuly", status: true })
                 }
             })
@@ -94,10 +119,10 @@ const adminfiles = (req, res) => {
 const delproduct = (req, res) => {
     let { id } = req.body;
     UploadModel.findByIdAndDelete({ _id: id }, (err, result) => {
-        if (err) {} else {
+        if (err) { } else {
             res.send({ result });
         }
     })
 }
 
-module.exports = { adminregist, adminlogin, admin, file, adminfiles, delproduct }
+module.exports = { adminregist, adminlogin, admin, file, adminfiles, delproduct, adminfp }
