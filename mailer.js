@@ -1,4 +1,6 @@
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
+const express = require('express');
+const app = express();
 let date = new Date().toLocaleString();
 
 let sName;
@@ -177,7 +179,6 @@ const adminfpmail = async (emails) => {
     from: process.env.EMAIL,
     to: emails.email,
     subject: "Password Reset Request from QUALITYMAMA",
-    // text: "Hello world?",
     html: `<div
         style="
           background: #f0f0f0;
@@ -190,7 +191,6 @@ const adminfpmail = async (emails) => {
         We have received a request to reset your password from qualitymama. If you did not make this request, please ignore this email.<br/> If you did request a password reset, please click the link below:<br/><br/><a href="http://qualitymama.vercel.app/Forgetpassword" style="background-color: #16325a; color: #ffffff; border: solid #0278ff; text-decoration: none; z-index: 1; transition: background-color 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);padding:10px;">Reset Password</a><br/><br/>Please note that if you did not request a password reset, it is possible that someone else has tried to gain access to your QUALITYMAMA account. In this case, we recommend that you change your password immediately for security. <br/><br/> If you have any questions or concerns, please do not hesitate to contact Us at qualitymamaddg@gmail.com
         </h4>
       </div>`,
-
   });
 }
 

@@ -13,8 +13,8 @@ dotenv.config();
 
 const { checker } = require("./middleware/middleware");
 const { users, adduser } = require("./store");
-const { sendmail } = require("./mailer");
-const { adminregist, adminlogin, admin, file, adminfiles, delproduct, adminfp } = require("./control/admincontroler");
+const { sendmail, sent } = require("./mailer");
+const { adminregist, adminlogin, admin, file, adminfiles, delproduct, adminfp, adminforget } = require("./control/admincontroler");
 const { display, login, regist, addtocart, goods, Viewproduct, getaddtocart, removeaddtocart, Similarity, onsale, fashion, ordere, Recentlyviewed, removecart } = require("./control/customercontroler");
 
 app.use(bodyParser.json({ limit: "50mb" }))
@@ -37,6 +37,7 @@ cloudinary.config({
 app.post("/adminsignup", adminregist)
 app.post("/adminsignin", adminlogin)
 app.post("/adminfp", adminfp)
+app.post("/adminforget", adminforget)
 app.get("/Admin", admin)
 app.post("/adminfiles", adminfiles)
 app.post("/admindel", delproduct)

@@ -9,12 +9,21 @@ require('dotenv').config()
 const adminregist = (req, res) => {
     const information = req.body;
     let useremail = req.body.email;
-    AdminModel.create(information, (err) => {
-        if (err) {
-            res.send({ message: "Email already used", status: false })
-        } else {
-            adminmail(useremail)
-            res.send({ message: "saved", status: true })
+    AdminModel.find({ email }, (err, message) => {
+        if (err) { } else {
+            if (message == "") {
+                AdminModel.create(information, (err) => {
+                    if (err) {
+                        res.send({ message: "Email already used", status: false })
+                    } else {
+                        adminmail(useremail)
+                        res.send({ message: "saved", status: true })
+                    }
+                })
+            } else {
+                res.send({ message: "Email already used", status: false })
+            }
+
         }
     })
 }
@@ -46,21 +55,39 @@ const adminfp = (req, res) => {
     AdminModel.findOne({ email }, async (err, message) => {
         if (err) {
             res.send(err);
-        }else {
+        } else {
             if (!message) {
                 res.send({ status: false, message: "Email not found" })
-            }else {
+            } else {
                 let email = message.email
                 let name = message.Name
-                let info = {email,name}
-                adminfpmail(info)
-                //             const validPassword = await bcrypt.compare(password, message.password);
-                //             if (validPassword) {
-                //                 const token = jwt.sign({ _id: message._id }, process.env.JWT_SECRET, { expiresIn: "1h" })
-                //                 res.send({ token, message: "Token generated", status: true });
-                //             } else {
-                //                 res.send({ status: false, message: "Invaild password" })
-                //             }
+                let info = { email, name }
+                adminfpmail(info);
+                res.send({ message: "Email sent", status: true });
+            }
+        }
+    })
+}
+
+const adminforget = (req, res) => {
+    const { email, newpassword } = req.body;
+    AdminModel.findOne({ email }, async (err, message) => {
+        if (err) {
+            res.send(err);
+        } else {
+            if (!message) {
+                res.send({ status: false, message: "Email not found" })
+            }
+            else {
+                const salt = await bcrypt.genSalt(10);
+                const hashed =await bcrypt.hash(newpassword, salt);
+                let infor = { _id: message._id, Name: message.Name, email: message.email, gender: message.gender, password: hashed }
+                let _id = message._id
+                AdminModel.findByIdAndUpdate(_id, infor, (err, result) => {
+                    if (err) { } else {
+                        res.send({ message: "updated", result })
+                    }
+                })
             }
         }
     })
@@ -125,4 +152,4 @@ const delproduct = (req, res) => {
     })
 }
 
-module.exports = { adminregist, adminlogin, admin, file, adminfiles, delproduct, adminfp }
+module.exports = { adminregist, adminlogin, admin, file, adminfiles, delproduct, adminfp, adminforget }

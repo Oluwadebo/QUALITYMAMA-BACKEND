@@ -9,12 +9,20 @@ require('dotenv').config()
 const regist = (req, res) => {
     const information = req.body;
     let useremail = req.body.email;
-    CustomerModel.create(information, (err) => {
-        if (err) {
-            res.send({ message: "Email already used", status: false })
-        } else {
-            customermail(useremail)
-            res.send({ message: "saved", status: true })
+    CustomerModel.find({ email }, (err, message) => {
+        if (err) { } else {
+            if (message == "") {
+                CustomerModel.create(information, (err) => {
+                    if (err) {
+                        res.send({ message: "Email already used", status: false })
+                    } else {
+                        customermail(useremail)
+                        res.send({ message: "saved", status: true })
+                    }
+                })
+            } else {
+                res.send({ message: "Email already used", status: false })
+            }
         }
     })
 }
