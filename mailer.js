@@ -113,7 +113,7 @@ const ordered = async (emails) => {
   let info = await transporter.sendMail({
     from: process.env.EMAIL,
     to: emails.EMAIL,
-    subject: "Ordered Product From Qualitymama Store",
+    subject: "Order Confirmation for Qualitymama Store Admin",
     html: `<div
         style="
           background: #f0f0f0;
@@ -122,13 +122,11 @@ const ordered = async (emails) => {
           padding: 20px;
         ">
         <h3 style="text-align: left;padding: 0px 45px;">
-          Dear Admin. <br/> Our customer ${emails.Name} with id <b>${emails.id}<b/>, Has an order. <br/> Here are the details of the order:
+          Dear Admin. <br/>I am writing to Inform about the recently placed order, Which is to be delivered to    ${emails.Locatio}. <br/> Order Details: <br/>
         </h3>
         <h3 style="text-align: left;padding: 0px 15px;">
-          ${itemsHtml}
-        </h3>
-        <h3 style="text-align: left;padding: 0px 45px;">
-        at <span>${date}</span> to be delivered to this Location, ${emails.Locatio}.
+        Name - information - price <br/>
+          ${itemsHtml}<br/>The order was placed by the following customer:<br>Name: ${emails.Name} <br/>Email     ${emails.EMAIL}
         </h3>
         <h4 style="text-align: center">
         Thank you for shopping with us! <br/>  Contact: 09044796430, 08104495801, 08087683003 or Email: qualitymamaddg@gmail.com<br /> for more enquires.
@@ -189,7 +187,7 @@ const adminfpmail = async (emails) => {
         ">
         <h2>Dear ${emails.name},</h2>
         <h4>
-        We have received a request to reset your password from qualitymama. If you did not make this request, please ignore this email.<br/> If you did request a password reset, please click the link below:<br/><br/><a href="http://qualitymama.vercel.app/Forgetpassword">Reset Password</a><br/><br/>Please note that if you did not request a password reset, it is possible that someone else has tried to gain access to your QUALITYMAMA account. In this case, we recommend that you change your password immediately for security. <br/><br/> If you have any questions or concerns, please do not hesitate to contact Us at qualitymamaddg@gmail.com
+        We have received a request to reset your password from qualitymama. If you did not make this request, please ignore this email.<br/> If you did request a password reset, please click the link below:<br/><br/><a href="http://qualitymama.vercel.app/Forgetpassword" style="background-color: #16325a; color: #ffffff; border: solid #0278ff; text-decoration: none; z-index: 1; transition: background-color 1s cubic-bezier(0.455, 0.03, 0.515, 0.955);padding:10px;">Reset Password</a><br/><br/>Please note that if you did not request a password reset, it is possible that someone else has tried to gain access to your QUALITYMAMA account. In this case, we recommend that you change your password immediately for security. <br/><br/> If you have any questions or concerns, please do not hesitate to contact Us at qualitymamaddg@gmail.com
         </h4>
       </div>`,
 
