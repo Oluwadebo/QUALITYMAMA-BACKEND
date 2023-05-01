@@ -3,7 +3,7 @@ const { UploadModel, CustomerModel, AddtocartModel } = require('../model/model')
 const cloudinary = require('cloudinary');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { customermail, ordered, useraccountNumber, userName, } = require('../mailer');
+const { customermail, ordered, useraccountNumber, userName,forgetmail } = require('../mailer');
 require('dotenv').config()
 
 const regist = (req, res) => {
@@ -202,4 +202,47 @@ const Recentlyviewed = (req, res) => {
     })
 }
 
-module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity, onsale, fashion, ordere, Recentlyviewed, removecart };
+const forgetpassword = (req, res) => {
+    const email = req.body.mail;
+    CustomerModel.findOne({ email }, async (err, message) => {
+        if (err) {
+            res.send(err);
+        } else {
+            if (!message) {
+                res.send({ status: false, message: "Email not found" })
+            } else {
+                let email = message.email
+                let name = message.Name
+                let info = { email, name }
+                forgetmail(info);
+                res.send({ message: "Email sent", status: true });
+            }
+        }
+    })
+}
+
+const forget = (req, res) => {
+    const { email, newpassword } = req.body;
+    CustomerModel.findOne({ email }, async (err, message) => {
+        if (err) {
+            res.send(err);
+        } else {
+            if (!message) {
+                res.send({ status: false, message: "Email not found" })
+            }
+            else {
+                const salt = await bcrypt.genSalt(10);
+                const hashed =await bcrypt.hash(newpassword, salt);
+                let infor = { _id: message._id, Name: message.Name, email: message.email, password: hashed }
+                let _id = message._id
+                CustomerModel.findByIdAndUpdate(_id, infor, (err, result) => {
+                    if (err) { } else {
+                        res.send({ message: "updated", result })
+                    }
+                })
+            }
+        }
+    })
+}
+
+module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity, onsale, fashion, ordere, Recentlyviewed, removecart,forgetpassword,forget };
