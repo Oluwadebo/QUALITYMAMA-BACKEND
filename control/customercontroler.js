@@ -118,6 +118,16 @@ const fashion = (req, res) => {
     })
 }
 
+const Carouse = (req, res) => {
+    let selectedOption = req.body.Carous
+    UploadModel.find({ selectedOption }, (err, result) => {
+        if (err) {
+        } else {
+            res.send({ result })
+        }
+    })
+}
+
 const Viewproduct = (req, res) => {
     let _id = req.body.ViewproductId;
     UploadModel.find({ _id }, (err, result) => {
@@ -245,4 +255,4 @@ const forget = (req, res) => {
     })
 }
 
-module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity, onsale, fashion, ordere, Recentlyviewed, removecart,forgetpassword,forget };
+module.exports = { display, login, regist, goods, addtocart, Viewproduct, getaddtocart, removeaddtocart, Similarity, onsale, fashion, ordere, Recentlyviewed, removecart,forgetpassword,forget,Carouse };
