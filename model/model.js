@@ -10,6 +10,10 @@ const uploadSchema = new mongoose.Schema(
         description: String,
         selectedOption: String,
         Pprice: String,
+        dateAdded: {
+            type: String,
+            default: new Date().toLocaleDateString()
+        },
     }
 )
 
@@ -62,7 +66,7 @@ const AddtocartSchema = new mongoose.Schema(
         description: String,
         price: String,
         file: String,
-        information:String,
+        information: String,
     }
 )
 
