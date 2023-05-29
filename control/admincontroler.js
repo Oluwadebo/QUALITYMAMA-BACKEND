@@ -9,6 +9,7 @@ require('dotenv').config()
 const adminregist = (req, res) => {
     const information = req.body;
     let useremail = req.body.email;
+    let email = req.body.email;
     AdminModel.find({ email }, (err, message) => {
         if (err) { } else {
             if (message == "") {
